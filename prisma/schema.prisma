@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model challenge_progress {
+  id          Int    @id @default(autoincrement())
+  userId      String @db.Text
+  challengeId Int
+  completed   Int    @default(0) @db.TinyInt
+
+  @@index([challengeId], map: "fk_chal_idx")
+}
+
+model challenges {
+  id       Int    @id @default(autoincrement())
+  lessonId Int
+  question String @db.VarChar(45)
+  order    Int?
+
+  @@index([lessonId], map: "pk_lessonId_idx")
+}
+
+model cos_uprog {
+  courseId       Int
+  userProgressId String @db.VarChar(255)
+
+  @@id([courseId, userProgressId])
+  @@index([userProgressId], map: "userProgressId")
+}
+
+model courses {
+  id       Int    @id @default(autoincrement())
+  name     String @db.VarChar(255)
+  imageSrc String @db.VarChar(255)
+}
+
+model lessons {
+  id     Int    @id @default(autoincrement())
+  title  String @db.Text
+  order  Int
+  unitId Int?
+
+  @@index([unitId], map: "fk_unit_idx")
+}
+
+model units {
+  id          Int    @id @default(autoincrement())
+  title       String @db.Text
+  description String @db.Text
+  order       Int
+  courseId    Int?
+
+  @@index([courseId], map: "courseId_idx")
+}
+
+model user_progress {
+  id             String  @id @db.VarChar(255)
+  userName       String  @default("User") @db.VarChar(45)
+  userImageSrc   String? @db.Text
+  activeCourseId Int?
+  hearts         Int     @default(5)
+  points         Int     @default(0)
+
+  @@index([activeCourseId], map: "id_idx")
+}
+
+model challenge_options {
+  id          Int    @id @default(autoincrement())
+  challengeId Int
+  text        String @db.Text
+  correct     Int    @db.TinyInt
+
+  @@index([challengeId], map: "fk_chall_idx")
+}
