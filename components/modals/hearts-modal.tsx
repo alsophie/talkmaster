@@ -31,7 +31,7 @@ export const HeartsModal = () => {
                         У вас закончились жизни!
                     </DialogTitle>
                     <DialogDescription className="text-center text-base text-s text-red-900">
-                        Подключите подписку или купите их в магазине.
+                        Купите их в магазине.
                     </DialogDescription>
                     <DialogFooter>
                         <div className="flex flex-col gap-y-4 w-full">
