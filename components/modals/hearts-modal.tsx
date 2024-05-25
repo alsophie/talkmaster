@@ -37,7 +37,7 @@ export const HeartsModal = () => {
                         <div className="flex flex-col gap-y-4 w-full">
                             <Button variant="secondary" className="w-full mt-5" size="lg" onClick={() => {
                                 close()
-                                router.push("/store")
+                                router.push("/shop")
                             }}>
                                 Преобрести жизни
                             </Button>
