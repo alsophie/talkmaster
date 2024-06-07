@@ -1,4 +1,3 @@
-
 import { FeedWrapper } from "@/components/feed-wrapper"
 import { StickyWrapper } from "@/components/sticky-wrapper"
 import { Header } from "./header"
@@ -14,7 +13,7 @@ const LearnPage = async () => {
 
     const unitsData = getUnits()
 
-    const courseProgressData = getCourseProgress()
+    const courseProgressData = await getCourseProgress()
     const lessonPercentageData = getLessonPercentage()
 
     const [userProgress, units, courseProgress, lessonPercentage] = await 

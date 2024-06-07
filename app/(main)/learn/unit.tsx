@@ -28,8 +28,10 @@ lessons, activeLesson, activeLessonPresentage}: Props) => {
             <UnitBanner title={title} description={description} />
             <div className="flex items-center flex-col relative">
                 {lessons.map((lesson, index) => {
+                    // {console.log(lesson)}
                     const isCurrent = lesson.id === activeLesson?.id
-                    const isLocked = !lesson.completed && !isCurrent
+                    const isLocked = !lesson.completed && !isCurrent && lesson.id > (activeLesson?.id ?? 0)
+                    // {console.log(lesson.title, lesson.completed, isCurrent, "result:", isLocked)}
 
                     return (
                         <LessonButton 

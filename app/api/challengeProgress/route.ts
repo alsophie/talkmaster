@@ -4,7 +4,7 @@ import { db } from "@/lib/db"
 import { getIsAdmin } from "@/lib/admin"
 
 export const GET = async () => {
-    if (!getIsAdmin()) return new NextResponse("Не авторизован", {status: 401})
+    if (!await getIsAdmin()) return new NextResponse("Не авторизован или нет необходимых прав", {status: 401})
     
     try {
         const data = await db.challenge_progress.findMany()
@@ -18,7 +18,7 @@ export const GET = async () => {
 }
 
 export const POST = async (req: Request) => {
-    if (!getIsAdmin()) return new NextResponse("Не авторизован", {status: 401})
+    if (!await getIsAdmin()) return new NextResponse("Не авторизован или нет необходимых прав", {status: 401})
 
     try {
         const body = await req.json()

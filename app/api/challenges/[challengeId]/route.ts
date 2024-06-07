@@ -6,7 +6,7 @@ export const GET = async (
     req: Request,
     {params}: {params: {challengeId: string}}
 ) => {
-    if (!getIsAdmin()) return new NextResponse("Не авторизован", {status: 401})
+    if (!await getIsAdmin()) return new NextResponse("Не авторизован или нет необходимых прав", {status: 401})
     try {
         const challengeId = parseInt(params.challengeId, 10) 
         if (isNaN(challengeId)) throw new Error("Некорректный course ID")
@@ -28,7 +28,7 @@ export const PUT = async (
     req: Request,
     {params}: {params: {challengeId: string}}
 ) => {
-    if (!getIsAdmin()) return new NextResponse("Не авторизован", {status: 401})
+    if (!await getIsAdmin()) return new NextResponse("Не авторизован или нет необходимых прав", {status: 401})
 
     try {
         const body = await req.json()
@@ -56,7 +56,7 @@ export const DELETE = async (
     req: Request,
     {params}: {params: {challengeId: string}}
 ) => {
-    if (!getIsAdmin()) return new NextResponse("Не авторизован", {status: 401})
+    if (!await getIsAdmin()) return new NextResponse("Не авторизован или нет необходимых прав", {status: 401})
     try {
         const challengeId = parseInt(params.challengeId, 10) 
         if (isNaN(challengeId)) throw new Error("Некорректный course ID")

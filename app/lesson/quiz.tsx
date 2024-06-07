@@ -23,12 +23,10 @@ type Props = {
         completed: boolean
         challengeOptions: challenge_options[]
     })[]
-    userSubscription: any
 }
 
 export const Quiz = ({initialPercentage,
-initialHearts, initialLessonId, initialLessonChallenges,
-userSubscription}: Props) => {
+initialHearts, initialLessonId, initialLessonChallenges}: Props) => {
 
     const {open: openHeartsModal} = useHeartsModal()
 
@@ -194,7 +192,6 @@ userSubscription}: Props) => {
             <Header 
                 hearts={hearts}
                 percantage={percentage}
-                hasAcriveSubscription={!!userSubscription?.isActive}
             />
 
             <div className="flex-1">

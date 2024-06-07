@@ -6,10 +6,9 @@ import Image from "next/image"
 type Props = {
     hearts: number
     percantage: number
-    hasAcriveSubscription: boolean
 }
 
-export const Header = ({hearts, percantage, hasAcriveSubscription}: Props) => {
+export const Header = ({hearts, percantage}: Props) => {
     const {open} = useExitModal()
 
     return (
@@ -25,8 +24,7 @@ export const Header = ({hearts, percantage, hasAcriveSubscription}: Props) => {
             <Progress value={percantage}/>
             <div className="text-rose-500 flex items-center font-bold">
                 <Image src="/heart.png" alt="heart" height={28} width={28} className="mr-2"/>
-                {hasAcriveSubscription ? <InfinityIcon className="h-6 w-6 stroke-[3]"/>
-                : hearts}
+                {hearts}
 
             </div>
         </header>
