@@ -3,12 +3,12 @@ import { auth } from "@clerk/nextjs/server"
 import { cache } from "react"
 
 
-export const getCourses = cache( async() => {
+export const getCourses = async() => {
     const courses = await db.courses.findMany()
     return courses
-})
+}
 
-export const getUserProgress = cache(async () => {
+export const getUserProgress = async () => {
     const {userId} = await auth()
 
     if (!userId) {
@@ -22,9 +22,9 @@ export const getUserProgress = cache(async () => {
         }
     })
     return data
-})
+}
 
-export const getCourseBiId = cache(async (courseId: number) => {
+export const getCourseBiId = async (courseId: number) => {
     const data = await db.courses.findFirst({
         where: {
             id: courseId
@@ -32,9 +32,9 @@ export const getCourseBiId = cache(async (courseId: number) => {
     })
 
     return data
-})
+}
 
-export const getUnits = cache(async () => {
+export const getUnits = async () => {
     const {userId} = await auth()
     const userProgress = await getUserProgress();
     if (!userId || !userProgress?.activeCourseId) {
@@ -96,9 +96,9 @@ export const getUnits = cache(async () => {
     )
   
     return unitData;
-  })
+  }
 
-export const getCourseProgress = cache(async () => {
+export const getCourseProgress = async () => {
     const { userId } = await auth()
     const userProgress = await getUserProgress()
   
@@ -167,9 +167,9 @@ export const getCourseProgress = cache(async () => {
       activeLesson: firstUncompletedLesson,
       activeLessonId: firstUncompletedLesson?.id
     }
-  })
+  }
 
-export const getLesson = cache(async (id?: number) => {
+export const getLesson = async (id?: number) => {
     const { userId } = await auth()
     if (!userId) {
       return null
@@ -236,9 +236,9 @@ export const getLesson = cache(async (id?: number) => {
       unit,
       challenges: challengesWithProgress
     }
-  })
+  }
 
-  export const getLessonPercentage = cache(async () => {
+  export const getLessonPercentage = async () => {
     const courseProgress = await getCourseProgress()
 
     if(!courseProgress?.activeLessonId) {
@@ -256,4 +256,4 @@ export const getLesson = cache(async (id?: number) => {
     const percentage = Math.round((completedChallenges.length / lesson.challenges.length) * 100)
 
     return percentage
-  })
+  }
