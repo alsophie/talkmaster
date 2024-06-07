@@ -63,7 +63,7 @@ export const getUnits = async () => {
             const challengesWithProgress = await Promise.all(
               challenges.map(async (challenge) => {
                 const challengeProgress = await db.challenge_progress.findMany({
-                  where: { challengeId: challenge.id }
+                  where: { challengeId: challenge.id, userId}
                 })
   
                 return {
